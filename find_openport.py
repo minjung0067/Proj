@@ -34,11 +34,6 @@ class handler_class(BaseHTTPRequestHandler):
 # create the object
 
 u = miniupnpc.UPnP()
-#print 'inital(default) values :'
-#print ' discoverdelay', u.discoverdelay
-#print ' lanaddr', u.lanaddr
-#print ' multicastif', u.multicastif
-#print ' minissdpdsocket', u.minissdpdsocket
 u.discoverdelay = 200
 
 try:
@@ -55,11 +50,9 @@ try:
 	print('external ip address :', externalipaddress)
 	print(u.statusinfo(), u.connectiontype())
 
-	#instanciate a HTTPd object. The port is assigned by the system.
-	#HTTPServer((server_address,port),RequestHandlerClass) 
 	httpd = HTTPServer((u.lanaddr, 0), handler_class)
 	eport = httpd.server_port
-	print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- ", eport)
+	print("=------------------=-=-=-=-=-=-=-   ", eport)
 
 	# find a free port for the redirection
 	r = u.getspecificportmapping(eport, 'TCP')
@@ -69,7 +62,7 @@ try:
 
 	print('trying to redirect %s port %u TCP => %s port %u TCP' % (externalipaddress, eport, u.lanaddr, httpd.server_port))
 
-	b = u.addportmapping(12343, 'TCP', u.lanaddr, 5001,
+	b = u.addportmapping(12343, 'TCP', u.lanaddr, 100,
 	                    'UPnP IGD Tester port %u' % eport, '')
 	if b:
 		print('Success. Now waiting for some HTTP request on http://%s:%u' % (externalipaddress ,eport))
