@@ -37,7 +37,7 @@ u = miniupnpc.UPnP()
 #print 'inital(default) values :'
 #print ' discoverdelay', u.discoverdelay
 #print ' lanaddr', u.lanaddr
-#print ' multicastif', u.multicastif
+#print ' multicastif', u.multicastiffffffffffffffffff
 #print ' minissdpdsocket', u.minissdpdsocket
 u.discoverdelay = 200
 
@@ -69,7 +69,7 @@ try:
 
 	print('trying to redirect %s port %u TCP => %s port %u TCP' % (externalipaddress, eport, u.lanaddr, httpd.server_port))
 
-	b = u.addportmapping(12343, 'TCP', u.lanaddr, 5001,
+	b = u.addportmapping(12343, 'TCP','192.168.2.182', 5000,
 	                    'UPnP IGD Tester port %u' % eport, '')
 	if b:
 		print('Success. Now waiting for some HTTP request on http://%s:%u' % (externalipaddress ,eport))
