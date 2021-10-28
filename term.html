@@ -1,0 +1,79 @@
+            function _onConnect_upnp(){
+                // check form is valid
+                var formData = new FormData($('#new_upnp_form')[0]);
+                var iport = document.getElementById('iport');
+                var ip = document.getElementById('ip');
+                var protocol = document.getElementById('protocol');
+                var content = document.getElementById('content');
+
+                if ( iport.value == "" || ip.value == "" ){
+                    Swal.fire({
+                        title: '{{ _("Failed to connect UPnP") }}',
+                        text: '{{ _("You have to fill all inputs correctly") }}',
+                        confirmButtonText: '{{ _("OK") }}',
+                        confirmButtonColor: "#596da8e5",
+                        width: 550
+                    });
+                }
+                else if ( protocol.value != "TCP" && protocol.value != "UDP") {
+                    Swal.fire({
+                        title: '{{ _("Failed to connect UPnP") }}',
+                        text: '{{ _("Choose correct protocol") }}',
+                        confirmButtonText: '{{ _("OK") }}',
+                        confirmButtonColor: "#596da8e5",
+                        width: 550
+                    });
+                }
+                else if (content.value = ""){
+                    content = "Default content"
+                }
+
+                else{
+                    Swal.fire(
+                    {
+                        title: '{{ _("UPnP 기능을 사용하시겠습니까?") }}',
+                        html: '{{ _("사용중인 UPnP 목록은 어디에서 확인할 수 있습니다.") }}',
+                        showCancelButton: true,
+                        confirmButtonText: '{{ _("Connect") }}',
+                        cancelButtonText: '{{ _("Cancel") }}',
+                        confirmButtonColor: "#596da8e5",
+                        cancelButtonColor: "#e64a4ac7",
+                        width: 550
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/connect-upnp',
+                                type: 'POST',
+                                data: formData,
+                                dataType: 'json',
+                                contentType: false,
+                                processData: false,
+                                success: function(data) {
+                                    alert("예스")
+                                    console.log(data);
+                                    if(data['data'][0]['result']){ 
+                                        alert("성공함");
+                                        // 성공했다는 내용과 함께 어떤 포트 배정 받았는지 alert , 
+                                        // Swal.fire(
+                                        // {
+                                        //     confirmButtonColor: '#596da8e5',
+                                        //     width: 500
+                                        // }).then(function(result) {
+                                        //     location.href = redirect;
+                                        // });
+                                    }
+                                    else{
+                                        alert("다시시도바람")
+                                        // 실패했다는 alert 다시 시도 해주시기 바람
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+                }
+
+
+            }
+
+            // 취소 버튼 누르면 모달 창 초기화시키는 거
