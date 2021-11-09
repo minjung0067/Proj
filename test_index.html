@@ -1,0 +1,47 @@
+{% include "./partials/main.html" %}
+<head>
+	{% include "./partials/title-meta.html" %}
+
+	{% include "./partials/head-css.html" %}
+	
+	<!-- Index Custom -->
+	<link href="static/css/index.css" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+{% include "./partials/body.html" %}
+	<!-- Begin page -->
+	<div id="layout-wrapper">
+
+		{% include "./partials/top-nav.html" %}
+
+		{% include "./partials/sidebar.html" %}
+			
+		<div class="main-content">
+			<div class="page-content">
+				<div class="container-fluid">
+
+                    <!-- ================ -->
+                    <!-- 내부 코드 작성  -->
+                    <!-- ================ -->
+
+				</div>
+				<!-- end of container-fluid -->	
+			</div>
+			<!-- end of page-content -->					
+		</div>
+		<!-- end of main-content -->
+
+		{% include "./partials/footer.html" %}
+
+	</div>
+	<!-- end of layout-wrapper -->
+
+{% include "./partials/vendor-scripts.html" %}
+
+<!-- 이 페이지에서만 사용하는 js 링크 연결 -->
+
+<script>
+// 이 페이지에서만 사용하는 직접 작성 
+</script>
+</body>
+</html>
