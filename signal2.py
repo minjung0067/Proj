@@ -3,7 +3,10 @@ import signal
 from time import sleep  
 
 def receiveSignal(signalNumber, frame):  
-    wait()
+    status = os.wait()
+    print("\nIn parent process-")
+    print("Terminated child's process id:", status[0])
+    print("Signal number that killed the child process:", status[1])
     print(' received SIGTERM signal ', signalNumber)  
     return
     
