@@ -4,7 +4,7 @@ import time
  
 cli = paramiko.SSHClient()
 cli.set_missing_host_key_policy(paramiko.AutoAddPolicy)
-cli.connect("test.com", username="user", password="pwd")
+cli.connect("192.168.0.190", username="vraptor", password="vraptor")
  
 # 새로운 interactive shell session 생성
 channel = cli.invoke_shell()
