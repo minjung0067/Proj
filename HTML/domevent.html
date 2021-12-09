@@ -1,0 +1,45 @@
+<html>
+
+<body>
+    <div id="main">
+        <button onclick="addOne()">add one by html</button>
+        <button onclick="add()">add one by element</button>
+        <button onclick="removeOne()">remove one by element</button>
+        </main>
+</body>
+<script>
+    var main = document.querySelector("#main")
+    function addOne() {
+        console.log("add node by html")
+        main.innerHTML += "<p>haha</p>";
+        console.log("added node")
+    }
+    function add() {
+        console.log("adding node by element")
+        var ele = document.createElement('p')
+        ele.innerHTML = "haha"
+        main.appendChild(ele)
+        console.log("added node")
+    }
+    function removeOne() {
+        var sons = main.children
+        var removing = sons[sons.length - 1]
+        console.log("removing " + removing.tagName)
+        if (removing.tagName.toLowerCase() == 'button') {
+            alert("remove!!！")
+            return
+        }
+        main.removeChild(removing)
+        console.log("child removed")
+    }
+    document.body.addEventListener("DOMNodeInserted", function () {
+        console.log('DOMNode inserted')
+        console.log(arguments)
+    })
+    document.body.addEventListener("DOMNodeRemoved", function () {
+        console.log("DOMNode removed")
+        console.log(arguments)
+    })
+</script>
+
+</html>
