@@ -1,0 +1,39 @@
+// DataTable Settings
+$('#clientDataTable').DataTable({
+    lengthChange:!1,
+    sScrollX: "80%",
+    sScrollXInner: "110%",
+    bScrollCollapse: true,
+    order: [[1, 'desc'], [2, 'desc'],[0,'asc']],
+    processing: true,
+    dom: "<'row'<'col-sm-12 col-md-8'B><'col-sm-12 col-md-4'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-0'i><'col-sm-12 col-md-12'p>>",
+    buttons:["pageLength", "colvis", "copy", "excel", "csv"],
+    autoWidth: false,
+    language: {
+        "info": '{{ _("Total: _TOTAL_, Now watching: _START_ - _END_") }}',
+        "infoEmpty": '{{ _("0 entry") }}',
+        "infoFiltered": '{{ _("(Total: _MAX_, Result of Searching: )") }}',
+        "lengthMenu": '{{ _("show _MENU_ rows") }}',
+        "search": '{{ _("Search :") }}',
+        "zeroRecords": '{{ _("There\'s no data.") }}',
+        "processing": '{{ _("Now loading the data...") }}',
+        "paginate": {
+            "next": '{{ _("Next") }}',
+            "previous": '{{ _("Previous") }}',
+        },
+    },
+    createdRow: function (row, data, index) {
+        $(row).attr("id", "client_id-"+data.client_id);
+    }
+}).buttons().container().appendTo("dataTable_wrapper .col-md-6:eq(0)"),
+$(".dataTables_length select").addClass("form-select form-select-sm"),
+$(".dt-buttons .btn").removeClass("btn-secondary"),
+$(".dt-buttons").removeClass("btn-group"),
+$(".buttons-page-length").addClass("btn-outline-info").prepend("<i class=\"mdi mdi-format-list-bulleted\"></i> "),
+$(".buttons-colvis").addClass("btn-outline-primary").prepend("<i class=\"mdi mdi-eye-outline\"></i> "),
+$(".buttons-copy").addClass("btn-outline-warning").prepend("<i class=\"mdi mdi-content-copy\"></i> "),
+$(".buttons-excel").addClass("btn-outline-success").prepend("<i class=\"mdi mdi-microsoft-excel\"></i> "),
+$(".buttons-csv").addClass("btn-outline-dark").prepend("<i class=\"fas fa-file-csv\"></i> "),
+$("#datatable-buttons_wrapper .row .col-md-6").eq(0).attr("class", "col-sm-12 col-md-8"),
+$("#datatable-buttons_wrapper .row .col-md-6").eq(0).attr("class", "col-sm-12 col-md-4");
+});

@@ -10,11 +10,11 @@ def receiveSignal(signalNumber, frame):
     print(' received SIGTERM signal ', signalNumber)  
     return
     
-def onsigchld():  
+def signal_handler():  
     print (' Received end of child process signal '  )
     signal.signal(signal.SIGCHLD,receiveSignal)  
 
-onsigchld()    # setting "Now, I am start to receive signal"
+signal_handler()    # setting "Now, I am start to receive signal"
     
 pid = os.fork()  
 if pid == 0:  
